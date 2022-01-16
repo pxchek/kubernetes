@@ -10,9 +10,10 @@ spec:
         - /bin/sh
         - -c
         - 'while true; do touch /tmp/heartbeat.txt; sleep 5; done;'
-      livenessProbe:
+      livenessProbe: # The probe will periodically check the modification timestamp is older than 1 minute, if
+        # yes, kubernetes assume the application is not functioning as expected and restarts the container.
         exec:
           command:
-            - test `find /tmp/heartbeat.txt --mmin -1`
+            - test `find /tmp/heartbeat.txt --mmin -1` # Find the file less than 1 minute old
         initialDelaySeconds: 5
         periodSeconds: 30
