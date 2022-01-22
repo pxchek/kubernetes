@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: business-app
+spec:
+  volumes: # the volume
+    - name: logs-volume # Mapping name
+      emptyDir: {}  # read/write access on a empty directory. It can be used for cache implementation
+  containers:
+    - image: nginx
+      name: nginx
+      volumeMounts: # the volume mount
+        - mountPath: /var/logs
+          name: logs-volume # Mapping name
+
