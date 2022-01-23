@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+    - image: nginx:latest
+      name: nginx
+
+
+# controlplane $ kubectl create -f nginx-pod.yaml --namespace=team-awesome
+# error: the path "nginx-pod.yaml" does not exist
+# controlplane $ kubectl create -f nginx-pod.yaml --namespace=team-awesome
+# Error from server (Forbidden): error when creating "nginx-pod.yaml": pods "nginx" is forbidden: failed quota: team-awesome-quota: must specify limits.cpu,limits.memory,requests.cpu,requests.memory
+# controlplane $ kubectl create -f nginx-pod.yaml
+# pod/nginx created
+# controlplane $
